@@ -1,0 +1,13 @@
+<sequence xmlns="http://ws.apache.org/ns/synapse" name="transaction_data_publisher">
+    <log level="custom">
+        <property name="Message" value="Publishing transcation data to WSO2 DAS"/>
+    </log>
+    <class name="org.wso2.carbon.apimgt.frauddetection.TransactionDataPublishingMediator">
+      <property name="dasHost" value="192.168.57.73"/>
+      <property name="dasPort" value="7615"/>
+      <property name="dasUsername" value="admin"/>
+      <property name="dasPassword" value="admin"/>
+      <property name="streamName" value="API_Stream"/>
+      <property name="streamVersion" value="1.0.0"/>
+    </class>
+</sequence>
