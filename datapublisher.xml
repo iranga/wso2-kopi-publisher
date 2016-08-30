@@ -1,13 +1,34 @@
-<sequence xmlns="http://ws.apache.org/ns/synapse" name="transaction_data_publisher">
-    <log level="custom">
-        <property name="Message" value="Publishing transcation data to WSO2 DAS"/>
-    </log>
-    <class name="org.wso2.carbon.apimgt.frauddetection.TransactionDataPublishingMediator">
-      <property name="dasHost" value="192.168.57.73"/>
-      <property name="dasPort" value="7615"/>
-      <property name="dasUsername" value="admin"/>
-      <property name="dasPassword" value="admin"/>
-      <property name="streamName" value="API_Stream"/>
-      <property name="streamVersion" value="1.0.0"/>
-    </class>
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="publish-endUser" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+  <log level="full"/>
+  <property expression="get-property('$axis2:HTTP_METHOD')" name="VERB"
+    scope="default" type="STRING" xmlns:ns="http://org.apache.synapse/xsd"/>
+  <property expression="get-property('transport','X-JWT-Assertion')"
+    name="authheader" scope="default" type="STRING" xmlns:ns="http://org.apache.synapse/xsd"/>
+  <log level="custom">
+    <property expression="base64Decode(get-property('authheader'))"
+      name="LOG_AUTHHEADER" xmlns:ns="http://org.apache.synapse/xsd"/>
+  </log>
+  <property expression="base64Decode(get-property('authheader'))"
+    name="decode_auth" scope="default" type="STRING" xmlns:ns="http://org.apache.synapse/xsd"/>
+  <script language="js"><![CDATA[var jsonStr= mc.getProperty('decode_auth');
+var val= new Array();
+val=jsonStr.split("}");
+var decoded= new Array();
+decoded= val[1].split("enduser\"\:");
+var temp_str= new Array();
+temp_str=decoded[1].split('\"');
+mc.setProperty("end_user",temp_str[1]);]]></script>
+  <property expression="get-property('end_user')" name="endUser"
+    scope="default" type="STRING"/>
+  <log level="custom">
+    <property expression="get-property('endUser')" name="Log_Enduser"/>
+  </log>
+  <class name="org.wso2.api.publish.PublishMediate">
+    <property name="dasPort" value="7615"/>
+    <property name="dasUsername" value="admin"/>
+    <property name="dasPassword" value="admin"/>
+    <property name="dasHost" value="localhost"/>
+    <property name="streamName" value="API_Stream1:1.0.0"/>
+  </class>
 </sequence>
