@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `Rewards`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Rewards` (
   `subscriber` varchar(100) DEFAULT NULL,
-  `points` mediumtext
+  `points` double
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -45,10 +45,11 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `drinks`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `drinks` (
-  `drinkName` text,
-  `quantity` bigint(20) DEFAULT NULL,
-  `avlQuantity` bigint(20) DEFAULT NULL
+CREATE TABLE `orders` (
+  `drinkName` varchar(100),
+  `qtyAvl` double DEFAULT NULL,
+  `qtyOrder` double  DEFAULT NULL
+  `qtyOrder` double  DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -59,6 +60,11 @@ CREATE TABLE `drinks` (
 LOCK TABLES `drinks` WRITE;
 /*!40000 ALTER TABLE `drinks` DISABLE KEYS */;
 INSERT INTO `drinks` VALUES ('Milk',591,1000);
+insert into orders (drinkName,qtyAvl,qtyOrder,ROF) values ('DOPPIO',900,900,10);
+insert into orders (drinkName,qtyAvl,qtyOrder,ROF) values ('ESPRESSO',800,800,9);
+insert into orders (drinkName,qtyAvl,qtyOrder,ROF) values ('AMERICANO',1200,1200,13);
+insert into orders (drinkName,qtyAvl,qtyOrder,ROF) values ('MACCIHIATO',900,900,11);
+insert into orders (drinkName,qtyAvl,qtyOrder,ROF) values ('LATTE',1000,1000,10);
 /*!40000 ALTER TABLE `drinks` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
