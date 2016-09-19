@@ -4,6 +4,7 @@
 
 3.Deploy "Streaming-CApp"  CApp to WSO2 CEP 
   Note: Configure Datasource ‘CEP-DS to point to tables created in step 1’
+        Add Machine Learning extentions
 
 4.Copy  the custom implementation (org.wso2.api.publish-1.0-SNAPSHOT.jar ) library to  $API_MGR_HOME /repository/components/lib
 
