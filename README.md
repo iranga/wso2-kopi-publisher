@@ -1,4 +1,4 @@
-1.Create MySql  database ‘test and import table_backup.sql’
+1.Execute script ‘db_script’ 
 
 2.Deploy  WSO2KopiOutletPlatform.war to Web Server/ WSO2 Application Server/WSO2 APP Cloudp
 
